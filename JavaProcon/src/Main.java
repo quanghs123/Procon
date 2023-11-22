@@ -1,7 +1,5 @@
+import java.io.*;
 import java.util.*;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) {
@@ -24,11 +22,28 @@ public class Main {
 
             //Danh sach index cua cac que diem
             List<Integer> listIndex = fillIndex(n, listRemove);
-            for (int i = 0; i < listIndex.size(); i++) {
-                System.out.println(listIndex.get(i));
+
+            int k = 0;
+            List<Integer> removes = new ArrayList<>();
+            for (int i = 2; i < 2 * n + 1; i = i + 2) {
+                for (int j = i * n + i / 2; j <= (i + 1) * n + k; j++) {
+                    if (
+                            !listIndex.contains(j) ||
+                                    !listIndex.contains(j - n) ||
+                                    !listIndex.contains(j - n - 1) ||
+                                    !listIndex.contains(j - 2 * n - 1) ||
+                                    listRemove.contains(j)||
+                                    listRemove.contains(j-n)||
+                                    listRemove.contains(j-n-1)||
+                                    listRemove.contains(j-2*n-1)
+                    ) {
+                        continue;
+                    }
+                    removes.add(j);
+                }
+                k += 1;
             }
-
-
+            writeFile("C:/Users/Admin/Desktop/Procon/output.txt",removes);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -44,6 +59,15 @@ public class Main {
             }
         }
         return listInput;
+    }
+
+    private static void writeFile(String outputFilePath, List<Integer> listRemoves) throws IOException {
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(outputFilePath))) {
+            for (Integer number : listRemoves) {
+                bufferedWriter.write(number.toString());
+                bufferedWriter.newLine();
+            }
+        }
     }
 
     //hàm đánh index cho các que diêm của hình vuông
