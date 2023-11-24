@@ -28,14 +28,14 @@ public class Main {
             for (int i = 2; i < 2 * n + 1; i = i + 2) {
                 for (int j = i * n + i / 2; j <= (i + 1) * n + k; j++) {
                     if (
-                            !listIndex.contains(j) ||
-                                    !listIndex.contains(j - n) ||
-                                    !listIndex.contains(j - n - 1) ||
-                                    !listIndex.contains(j - 2 * n - 1) ||
-                                    listRemove.contains(j)||
-                                    listRemove.contains(j-n)||
-                                    listRemove.contains(j-n-1)||
-                                    listRemove.contains(j-2*n-1)
+                            listRemove.contains(j) ||
+                                    listRemove.contains(j - n) ||
+                                    listRemove.contains(j - n - 1) ||
+                                    listRemove.contains(j - 2 * n - 1) ||
+                                    removes.contains(j) ||
+                                    removes.contains(j - n) ||
+                                    removes.contains(j - n - 1) ||
+                                    removes.contains(j - 2 * n - 1)
                     ) {
                         continue;
                     }
@@ -43,7 +43,7 @@ public class Main {
                 }
                 k += 1;
             }
-            writeFile("C:/Users/Admin/Desktop/Procon/output.txt",removes);
+            writeFile("C:/Users/Admin/Desktop/Procon/output.txt", removes);
         } catch (IOException e) {
             e.printStackTrace();
         }
